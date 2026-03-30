@@ -1,19 +1,60 @@
 /**
- * Work Anniversary Email Automation
- * Chicago Public Media — CEO Melissa Bell
+ * ============================================================
+ *   WORK ANNIVERSARY EMAIL AUTOMATION
+ *   Chicago Public Media — CEO Melissa Bell
+ * ============================================================
  *
- * Setup:
- *   1. Open your Google Sheet with employee data
- *   2. Go to Extensions > Apps Script
- *   3. Paste this entire script and save
- *   4. Run sendAnniversaryEmails() once manually to grant permissions
- *   5. Set up a daily trigger (see createDailyTrigger below)
+ * HOW TO SET UP (one-time, takes ~5 minutes):
  *
- * Expected spreadsheet columns (Row 1 = headers):
- *   A: First Name
- *   B: Last Name
- *   C: Email Address
- *   D: Start Date (any date format Google Sheets recognizes)
+ *   STEP 1 — PREPARE YOUR GOOGLE SHEET
+ *     • Open (or create) a Google Sheet
+ *     • Set up 4 columns with these exact headers in Row 1:
+ *         A: First Name
+ *         B: Last Name
+ *         C: Email Address
+ *         D: Start Date
+ *     • Fill in your employee data below the headers
+ *     • Make sure Start Date is formatted as a date
+ *       (select column D → Format → Number → Date)
+ *
+ *   STEP 2 — OPEN THE SCRIPT EDITOR
+ *     • In your Google Sheet, click Extensions → Apps Script
+ *     • Delete any code already there
+ *     • Paste this ENTIRE file and press Ctrl+S (or Cmd+S) to save
+ *
+ *   STEP 3 — GRANT PERMISSIONS
+ *     • At the top of the script editor, make sure the dropdown
+ *       next to the Run button says "sendAnniversaryEmails"
+ *     • Click the Run button (▶)
+ *     • A popup will ask you to authorize — click "Review Permissions"
+ *     • Choose your Google account
+ *     • You may see "Google hasn't verified this app" —
+ *       click "Advanced" → "Go to Untitled project (unsafe)"
+ *     • Click "Allow"
+ *     • This first run won't send anything unless someone's
+ *       anniversary happens to be today — that's fine!
+ *
+ *   STEP 4 — SET UP THE DAILY TRIGGER (so it runs automatically)
+ *     • Change the dropdown next to Run to "createDailyTrigger"
+ *     • Click the Run button (▶)
+ *     • That's it! The script will now check for anniversaries
+ *       every morning between 8–9 AM automatically.
+ *
+ *   ✅ YOU'RE DONE! The script runs on its own from here.
+ *
+ * ────────────────────────────────────────────────────────────
+ *   WANT TO CUSTOMIZE THE EMAIL?
+ *     • Scroll down to the "Email Template" section below
+ *     • You can change the greeting, the message, milestone
+ *       messages (1 year, 5 years, etc.), colors, and sign-off
+ *     • To test without sending real emails, change testMode
+ *       to true in CONFIG below, run it, then check the
+ *       Execution Log (View → Execution log) to preview
+ * ────────────────────────────────────────────────────────────
+ *
+ *   WANT TO STOP THE EMAILS?
+ *     • Change the dropdown to "removeDailyTrigger" and click Run
+ * ============================================================
  */
 
 // ─── Configuration ──────────────────────────────────────────────────────────
